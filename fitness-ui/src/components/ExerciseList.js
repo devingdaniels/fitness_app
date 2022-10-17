@@ -1,7 +1,7 @@
 import React from 'react'
 import Exercise from '../components/Exercise';
 
-const ExerciseList = ({exercise}) => {
+const ExerciseList = ({exercise, onEdit, onDelete}) => {
   return (
     <table id="exercises">
     <caption>Add and Edit Exercises</caption>
@@ -19,8 +19,8 @@ const ExerciseList = ({exercise}) => {
             <Exercise 
                 exercise={exercise} 
                 key={i}
-                // onDelete={onDelete}
-                // onEdit={onEdit} 
+                onDelete={onDelete}
+                onEdit={onEdit} 
             />)}
     </tbody>
 </table>

@@ -89,14 +89,20 @@ app.put('/exercise/:_id', async(req, res) =>{
 
     const response = await exercises.findExerciseById(req.params._id)
 
-    if (response !== null){
+    if (response === null){
+        res.status(400).json({Error: "Invalid request"})
+    }
 
-        const id = req.params._id
-        const name = req.body.name
-        const reps = req.body.reps
-        const weight = req.body.weight
-        const unit = req.body.unit
-        const date = req.body.date
+
+    const id = req.params._id
+    const name = req.body.name
+    const reps = req.body.reps
+    const weight = req.body.weight
+    const unit = req.body.unit
+    const date = req.body.date
+
+    if (isValidExerciseEntries(name, reps, weight, unit, date)){
+
     
         const count = await exercises.replaceExercise(id, name, reps, weight, unit, date)
         
@@ -112,7 +118,7 @@ app.put('/exercise/:_id', async(req, res) =>{
         console.log(count)
     }
     else {
-        res.status(400).json({Error: "Invalid request"})
+        res.status(400).json({Error: "Invalid entry. Please try again"})
     }
 
 
@@ -152,7 +158,7 @@ app.delete('/exercise/:_id', async (req, res) => {
 
        const count = await  exercises.deleteById(req.params._id)
         if (count === 1){
-            res.status(200).json({Success: "Document deleted successfully"})
+            res.status(204).json({Success: "Document deleted successfully"})
         }
         else {
             res.status(400).json({Error: "Document found but not deleted"})    
