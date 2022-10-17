@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
 
-const Footer = () => {
-  return (
-    <div>Footer</div>
-  )
+function Footer(){
+    const date = new Date().getFullYear()
+    return (        
+        <p>Created &copy;<i>{date}</i><cite> Devin Daniels</cite></p>
+    )
 }
 
 export default Footer

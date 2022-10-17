@@ -1,10 +1,7 @@
 // Import dependencies 
 import './App.css';
-import {
-  BrowserRouter,
-  Routes,
-  Route
-} from "react-router-dom";
+import {Routes, Route} from 'react-router-dom'
+import { useState } from 'react';
 
 // Components
 import Navigation from './components/Nav'
@@ -16,10 +13,11 @@ import CreateExercisePage from './pages/createExercisePage'
 import EditExercisePage from './pages/EditExercisePage'
 
 function App() {
+  // State to track array of exercise objects
+  const [exercise, setExercise] = useState([])
+
   return (
     <>
-      <BrowserRouter>
-
       <header>
         <h1>Fitness Tracker App</h1>
         <p>Add and track all your fitness exercises!</p>
@@ -27,28 +25,17 @@ function App() {
 
       <Navigation/>
 
-      <main>
-      <Routes>
-        <Route>
-          <HomePage path="/" exact></HomePage>
-        </Route>
-        
-        <Route>
-          <CreateExercisePage path="add-exercise"></CreateExercisePage>
-        </Route>
-
-        <Route>
-          <EditExercisePage path="edit-exercise"></EditExercisePage>
-        </Route>
-        
-      </Routes>
+      <main>      
+        <Routes>
+          <Route path='/' element={<HomePage setExercise={setExercise}/>} />
+          <Route path='add-exercise' element={<CreateExercisePage/>} />
+          <Route path='edit-exercise' element={<EditExercisePage exercise={exercise}/>} />
+        </Routes>
       </main>
 
       <footer>
         <Footer/>
       </footer>
-
-    </BrowserRouter>
     </>
   );
 }
