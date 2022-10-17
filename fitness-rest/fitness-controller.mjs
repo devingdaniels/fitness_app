@@ -84,6 +84,7 @@ app.get('/exercise', (req, res) =>{
 })
 
 // UPDATE controller 
+// ADD ASYNC HANDLER if coded this way 
 app.put('/exercise/:_id', async(req, res) =>{
 
     const response = await exercises.findExerciseById(req.params._id)
@@ -142,13 +143,29 @@ app.put('/exercise/:_id', async(req, res) =>{
 
 
 
+app.delete('/exercise/:_id', async (req, res) => {
 
 
+    const response = await exercises.findExerciseById(req.params._id)
+
+    if (response !== null){ 
+
+       const count = await  exercises.deleteById(req.params._id)
+        if (count === 1){
+            res.status(200).json({Success: "Document deleted successfully"})
+        }
+        else {
+            res.status(400).json({Error: "Document found but not deleted"})    
+        }
+
+        
+    }
+    else {
+        res.status(400).json({Error: "Document not found"})
+    }
 
 
-
-
-
+})
 
 
 app.listen(PORT, () => {

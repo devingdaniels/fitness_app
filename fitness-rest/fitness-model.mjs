@@ -69,8 +69,11 @@ const replaceExercise = async (_id, name, reps, weight, unit, date) => {
 }
 
 
+// DELETE model 
+const deleteById = async (_id) => {
+    const result = await Exercise.deleteOne({_id: _id});
+    return result.deletedCount;
+};
 
 
-
-
-export {createExercise, findExerciseById, findExercises, replaceExercise}
+export {createExercise, findExerciseById, findExercises, replaceExercise , deleteById}

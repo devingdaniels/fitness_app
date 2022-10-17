@@ -56,3 +56,5 @@ content-type: application/json
 }
 
 
+###
+DELETE http://localhost:3000/exercise/634da123cad8e2f197c42b62 HTTP/1.1
