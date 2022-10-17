@@ -42,6 +42,35 @@ const createExercise = async (name, reps, weight, unit, date) => {
     return exercise.save();
 }
 
+// RETRIEVE models *****************************************
+// Retrieve based on a filter and return a promise.
+const findExercises = async (filter) => {
+    const query = Exercise.find(filter);
+    return query.exec();
+}
+
+// Retrieve based on the ID and return a promise.
+const findExerciseById = async (_id) => {
+    const query = Exercise.findById(_id);
+    return query.exec();
+}
 
 
-export {createExercise}
+// UPDATE model 
+const replaceExercise = async (_id, name, reps, weight, unit, date) => {
+    const result = await Exercise.replaceOne({_id: _id }, {
+        name: name,
+        reps: reps,
+        weight: weight,
+        unit: unit, 
+        date: date
+    });
+    return result.modifiedCount;
+}
+
+
+
+
+
+
+export {createExercise, findExerciseById, findExercises, replaceExercise}
