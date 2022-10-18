@@ -1,5 +1,3 @@
-
-
 function isValidExerciseEntries(name, reps, weight, unit, date){
     if (name === "" || name === null){
         console.log('name failed to validate')
@@ -22,7 +20,6 @@ function isValidExerciseEntries(name, reps, weight, unit, date){
     return true
 }
 
-
 function formatDate(date) {
   // Input: 2022-10-18
   // Output: 10/18/2022
@@ -34,4 +31,4 @@ function formatDate(date) {
   return result;
 }
 
-  export { isValidExerciseEntries, formatDate}
+export { isValidExerciseEntries, formatDate}
