@@ -7,8 +7,8 @@ function isValidExerciseEntries(name, reps, weight, unit, date){
         console.log('reps or weight failed to validate')
         return false
     }
-    if (unit === 'lbs' || unit === 'kg' || unit === 'miles'){        
-        // console.log('unit is validate in isValidExercise function')
+    if (unit === 'lbs' || unit === 'kg' || unit === 'miles' || unit === 'meters'){        
+        // do nothing
     }else {
         console.log('unit failed to validate')
         return false
@@ -19,8 +19,6 @@ function isValidExerciseEntries(name, reps, weight, unit, date){
     }
     return true
 }
-
-
 
 
 export {isValidExerciseEntries}

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
-
+import { isValidExerciseEntries } from '../utils/HelperFunctions';
 
 const EditExercisePage = ({exercise}) => {
 
@@ -17,29 +17,34 @@ const EditExercisePage = ({exercise}) => {
   const [date, setDate] = useState(exercise.date)
 
 
-
-
   const editExercise = async () =>{
-    const response = await fetch(`/exercise/${exercise._id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ 
-        name: name, 
-        reps: reps, 
-        weight: weight, 
-        unit: unit, 
-        date: date
-    }),
-    headers: {'Content-Type': 'application/json',},  
-  })
+    // Make sure all entries have values
+    if( isValidExerciseEntries(name, reps, weight, unit, date)){
+      // Try to update document with new values
+      const response = await fetch(`/exercise/${exercise._id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ 
+          name: name, 
+          reps: reps, 
+          weight: weight, 
+          unit: unit, 
+          date: date
+      }),
+      headers: {'Content-Type': 'application/json',},  
+    })
+    // Check for success or failure
+    if (response.status === 200) {
+      alert("Successfully edited document!");
+  } else {
+      const errMessage = await response.json();
+      alert(`Failed to update document. Status ${response.status}. ${errMessage.Error}`);
+  }
+  navigate('/')
+  }
+}
 
-  if (response.status === 200) {
-    alert("Successfully edited document!");
-} else {
-    const errMessage = await response.json();
-    alert(`Failed to update document. Status ${response.status}. ${errMessage.Error}`);
-}
-navigate('/')
-}
+    
+
   
 
 
@@ -56,35 +61,42 @@ navigate('/')
                         type="text"
                         value={name}
                         onChange={e => setName(e.target.value)} 
-                        id="name"/>
+                        id="name"
+                        required
+                        />
                     
                     <label htmlFor="year">Total Reps</label>
                     <input
                         type="number"
                         value={reps}
                         onChange={e => setReps(e.target.value)} 
-                        id="year" />
+                        id="year" 
+                        required/>
 
                     <label htmlFor="weight">Total Weight</label>
                     <input
                         type="number"
                         value={weight}
                         onChange={e => setWeight(e.target.value)} 
-                        id="weight" />
+                        id="weight" 
+                        required/>
 
                     <label htmlFor="unit">Units</label>
-                    <input
-                        type="text"
-                        value={unit}
-                        onChange={e => setUnit(e.target.value)} 
-                        id="unit" />
+                    <select name="unit" id="unit"onChange={e =>setUnit(e.target.value)}
+                    required>
+                      <option value="lbs" >lbs</option>
+                      <option value="kg">kg</option>
+                      <option value="miles">miles</option>
+                      <option value="meters">meters</option>
+                    </select>
 
                     <label htmlFor="date">Date</label>
                     <input
                         type="date"
                         value={date}
                         onChange={e => setDate(e.target.value)} 
-                        id="date" />
+                        id="date" 
+                        />
 
                     <label htmlFor="submit">
                     <button

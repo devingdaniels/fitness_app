@@ -7,7 +7,7 @@ const ExerciseList = ({exercise, onEdit, onDelete}) => {
     <caption>Add and Edit Exercises</caption>
     <thead>
         <tr>
-            <th>Name</th>
+            <th>Exercise</th>
             <th>Reps</th>
             <th>Weight</th>
             <th>Unit</th>

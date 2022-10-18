@@ -36,8 +36,7 @@ const onDeleteExercise = async (_id) =>{
 }
 
 const onEditExercise = async (exercise) =>{
-  // Pass the exercise object back up the component tree
-  console.log('edit pressed')
+  // Pass the exercise object back up the component tree  
   setExercise(exercise);
   navigate('/edit-exercise');
 }

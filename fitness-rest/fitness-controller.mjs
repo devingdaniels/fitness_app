@@ -39,7 +39,7 @@ app.post('/exercise', (req, res) => {
             })
     }
     else{
-        res.status(400).json({Error: "Valid query but one or more values is invalid."})
+        res.status(400).json({Error: "One or more invalid or missing fields."})
     }
 })
 
@@ -85,69 +85,35 @@ app.get('/exercise', (req, res) =>{
 
 // UPDATE controller 
 // ADD ASYNC HANDLER if coded this way 
-app.put('/exercise/:_id', async(req, res) =>{
-
-    const response = await exercises.findExerciseById(req.params._id)
-
-    if (response === null){
-        res.status(400).json({Error: "Invalid request"})
-    }
-
-
-    const id = req.params._id
-    const name = req.body.name
-    const reps = req.body.reps
-    const weight = req.body.weight
-    const unit = req.body.unit
-    const date = req.body.date
-
-    if (isValidExerciseEntries(name, reps, weight, unit, date)){
-
-    
+app.put('/exercise/:_id', async(req, res) => {
+ // Query DB and see if document with ID exists
+ const response = await exercises.findExerciseById(req.params._id)
+ // Validate document
+ if (response === null){
+     res.status(400).json({Error: "Invalid request"})
+ } else {            
+        // Save the request body parameters
+        const id = req.params._id
+        const name = req.body.name
+        const reps = req.body.reps
+        const weight = req.body.weight
+        const unit = req.body.unit
+        const date = formatDate( req.body.date)
+        // Perform update on using DB method
+        // Returns count of documents updated
         const count = await exercises.replaceExercise(id, name, reps, weight, unit, date)
-        
-        res.json({
-            name: name, 
-            reps: reps,
-            weight: weight,
-            unit: unit,
-            date: date
-        })
-
-        console.log(response)
-        console.log(count)
-    }
-    else {
-        res.status(400).json({Error: "Invalid entry. Please try again"})
-    }
-
-
-    // // Extract values from req object
-    // const name = req.body.name
-    // const reps = req.body.reps
-    // const weight = req.body.weight
-    // const unit = req.body.unit
-    // const date = req.body.date
-    // // Validate valid data
-    // if (isValidExerciseEntries(name, reps, weight, unit, date)){
-    //     exercises.replaceExercise(req.params._id, name, reps, weight, unit, date)
-    //     // Returns promise, if successful, response will be the modified count
-    //         .then(count =>{
-    //             if (count === 1){
-    //                 res.json({
-    //                     name: name, 
-    //                     reps: reps,
-    //                     weight: weight,
-    //                     unit: unit,
-    //                     date: date
-    //                 })
-    //             }
-    //         })
-    // }
+        // Already validated document, verify document update
+        if (count === 1){
+            res.status(200).json({
+                name: name, 
+                reps: reps,
+                weight: weight,
+                unit: unit,
+                date: date
+            })
+        }
+    } 
 })
-
-
-
 
 app.delete('/exercise/:_id', async (req, res) => {
 
@@ -177,3 +143,5 @@ app.delete('/exercise/:_id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
 });
+
+

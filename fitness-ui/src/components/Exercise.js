@@ -1,9 +1,10 @@
 import React from 'react'
-import { MdDeleteForever, MdEdit } from 'react-icons/md';
+
 // Helper Functions
 import { formatDate } from '../utils/HelperFunctions';
 
-
+import { FaTrash} from 'react-icons/fa'
+import {FiEdit} from 'react-icons/fi'
 
 const Exercise = ({exercise, onEdit, onDelete}) => {
   return (
@@ -12,9 +13,9 @@ const Exercise = ({exercise, onEdit, onDelete}) => {
     <td>{exercise.reps}</td>
     <td>{exercise.weight}</td>
     <td>{exercise.unit}</td>
-    <td>{formatDate(exercise.date.substring(0,10))}</td>
-    <td><MdDeleteForever onClick={() => onDelete(exercise._id)}/></td>
-    <td><MdEdit onClick={() => onEdit(exercise)}/></td>
+    <td>{formatDate(exercise.date)}</td>
+    <td><FaTrash onClick={() => onDelete(exercise._id)}/></td>
+    <td><FiEdit onClick={() => onEdit(exercise)}/></td>
 </tr>
   )
 }
