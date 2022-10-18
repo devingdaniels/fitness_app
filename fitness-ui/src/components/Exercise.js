@@ -14,8 +14,8 @@ const Exercise = ({exercise, onEdit, onDelete}) => {
     <td>{exercise.weight}</td>
     <td>{exercise.unit}</td>
     <td>{formatDate(exercise.date)}</td>
-    <td><FaTrash onClick={() => onDelete(exercise._id)}/></td>
-    <td><FiEdit onClick={() => onEdit(exercise)}/></td>
+    <td><FaTrash className='deleteIcon' onClick={() => onDelete(exercise._id)}/></td>
+    <td><FiEdit className='editIcon' onClick={() => onEdit(exercise)}/></td>
 </tr>
   )
 }

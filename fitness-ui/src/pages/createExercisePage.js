@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 // Helper functions
 import {isValidExerciseEntries } from '../utils/HelperFunctions';
 
+// Components 
+
+
 
 const CreateExercisePage = () => {
 
@@ -50,12 +53,12 @@ const CreateExercisePage = () => {
   
   return (   
  <>
-      <article>
-            <h2>Add an exercise in the collection</h2>
-            <p>Paragraph about this page.</p>
+      <article>      
+            <h2>Add Exercise</h2>
+            <p>Use the form to add a new exercise </p>
             <form onSubmit={(e) => { e.preventDefault();}}>
                 <fieldset>
-                    <legend>Which movie are you adding?</legend>
+                    <legend>What exercise did you do?</legend>
                     <label htmlFor="name">Exercise Name</label>
                     <input
                         type="text"
@@ -100,14 +103,16 @@ const CreateExercisePage = () => {
                         value={date}
                         onChange={e => setDate(e.target.value)} 
                         id="date" 
-                        required/>
+                        required
+                        min = {new Date().toLocaleDateString('en-ca')}
+                        />
 
                     <label htmlFor="submit">
                     <button
                         type='submit'
                         onClick={addExercise}
                         id="submit"
-                    >Add</button> updates to the collection</label>
+                    >Add</button></label>
                 </fieldset>
                 </form>
             </article>

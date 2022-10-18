@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <header>
-        <h1>Fitness Tracker App</h1>
+        <h1>ExTrack</h1>
         <p>Add and track all your fitness exercises!</p>
       </header>
 

@@ -102,7 +102,7 @@ const EditExercisePage = ({exercise}) => {
                     <button
                         onClick={editExercise}
                         id="submit"
-                    >Save</button> updates to the collection</label>
+                    >Update</button></label>
                 </fieldset>
                 </form>
             </article>
