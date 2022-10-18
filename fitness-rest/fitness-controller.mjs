@@ -2,16 +2,12 @@ import 'dotenv/config';
 import express, { response } from 'express';
 import * as exercises from './fitness-model.mjs';
 
-// Helper functions
-import { isValidExerciseEntries } from './helperFunctions.mjs';
-
 // Express server running on port 3000
 const PORT = process.env.PORT; 
 const app = express();
 
 // Middleware function to parse PUT and POST requests 
 app.use(express.json());
-
 
 // CREATE controller
 app.post('/exercise', (req, res) => {
@@ -21,26 +17,21 @@ app.post('/exercise', (req, res) => {
     const weight = req.body.weight
     const unit = req.body.unit
     const date = req.body.date
-    // Validate valid data
-    if (isValidExerciseEntries(name, reps, weight, unit, date)){
-        // Returns a promise 
-        exercises.createExercise(name, reps, weight, unit, date)
-        // Send back code 201 (request successful and resource created)
-        // Send back new json exercise object
-            .then(exercise => {
-                res.status(201).json(exercise)
-                // Content type: application/json sent by default  
-            })
-        // Catch failures 
-        // Send back status code 400 (server cannot or failed to process the request )
-            .catch(error =>{
-                console.log(error)
-                res.status(400).json({Error: "Creation of a document failed due to invalid syntax."})
-            })
-    }
-    else{
-        res.status(400).json({Error: "One or more invalid or missing fields."})
-    }
+    // Validate valid data    
+    // Returns a promise 
+    exercises.createExercise(name, reps, weight, unit, date)
+    // Send back code 201 (request successful and resource created)
+    // Send back new json exercise object
+        .then(exercise => {
+            res.status(201).json(exercise)
+            // Content type: application/json sent by default  
+        })
+    // Catch failures 
+    // Send back status code 400 (server cannot or failed to process the request )
+        .catch(error =>{
+            console.log(error)
+            res.status(400).json({Error: "Creation of a document failed due to invalid syntax."})
+        })   
 })
 
 // RETRIEVE controllers
@@ -79,6 +70,7 @@ app.get('/exercise', (req, res) =>{
             res.send(exercises)
         })
         .catch(error=>{
+            console.log(error)
             res.status(404).json({error: "Failed to retrieve the collection"})
         })
 })
@@ -98,7 +90,7 @@ app.put('/exercise/:_id', async(req, res) => {
         const reps = req.body.reps
         const weight = req.body.weight
         const unit = req.body.unit
-        const date = formatDate( req.body.date)
+        const date = req.body.date
         // Perform update on using DB method
         // Returns count of documents updated
         const count = await exercises.replaceExercise(id, name, reps, weight, unit, date)
@@ -116,29 +108,20 @@ app.put('/exercise/:_id', async(req, res) => {
 })
 
 app.delete('/exercise/:_id', async (req, res) => {
-
-
+    // Find document by ID
     const response = await exercises.findExerciseById(req.params._id)
-
+    // Validate document in DB
     if (response !== null){ 
-
-       const count = await  exercises.deleteById(req.params._id)
+    // Model method returns count of deleted documents
+       const count = await exercises.deleteById(req.params._id)
         if (count === 1){
             res.status(204).json({Success: "Document deleted successfully"})
-        }
-        else {
-            res.status(400).json({Error: "Document found but not deleted"})    
-        }
-
-        
+        }              
     }
     else {
         res.status(400).json({Error: "Document not found"})
     }
-
-
 })
-
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);

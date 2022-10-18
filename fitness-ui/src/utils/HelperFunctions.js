@@ -30,7 +30,7 @@ function formatDate(date) {
   const year = string.slice(0, 4);
   const month = string.slice(5, 7);
   const day = string.slice(8, 10);
-  const result = `${month}/${day}/${year}`;
+  const result = `${month}-${day}-${year}`;
   return result;
 }
 
