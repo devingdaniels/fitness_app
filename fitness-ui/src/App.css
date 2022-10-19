@@ -1,43 +1,24 @@
 /*  ===== MOBILE styles (reside at the top and are inherited by all devices) ===== */
 /*  ===== See tablet, desktop, and print @media queries at the bottom. */
 
-/*   ----- Imports  -----  */
-/* Add fonts from the app's server 
-@font-face {                
-  font-family: 'FontName';
-  src: url('FontName.woff2') format('woff2');
-} 
-          */
-
-/* ...or hosted services like Google Fonts 
-@import url(//fonts.googleapis.com/css?family=Font+Name);
-          */
-
 @import "../node_modules/modern-normalize/modern-normalize.css";
 /* npm install modern-normalize 
-            Resets elements for browser consistancy.  
+            Resets elements for browser consistency.  
             http://nicolasgallagher.com/about-normalize-css/ 
           */
 
-/* Component-specific stylesheets, if any 
-@import "component1.css";   
-          */
-
-/*   ----- Variables  -----  */
-:root {
-  --custom-color-name: ;
-  --custom-embellishment-name: ;
+* {
+  box-sizing: border-box;
 }
 
 /*  ----- Viewport ----- elements inherited by all remaining elements ----- */
 body {
-  /* Can alternatively define in html {} or :root {} */
-  font-size: 1.2em;
-  margin: 1% 15%;
-  padding: ;
   background-color: rgb(10, 12, 16);
   color: rgb(144, 226, 235);
+  font-size: 1.2em;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -58,6 +39,7 @@ a:visited {
 nav {
   display: flex;
   justify-content: center;
+  /* Using icons for NAV so did not include all properties:values */
 }
 nav a {
   color: rgb(17, 212, 140);
@@ -71,120 +53,50 @@ nav a:hover {
 nav a:active {
   transform: translateY(2px);
 }
-
 /*  ----- Page layout blocks -----  */
-header {
-}
+
 main {
+  background-color: rgb(12, 14, 12);
+  color: rgb(125, 226, 235);
+  margin: 1% 15%;
+  padding: 1%;
+  box-shadow: 0 0 12px #3c4fe0;
 }
-section {
+
+footer,
+header {
+  background-color: rgb(48, 50, 54);
+  color: rgb(118, 210, 220);
+  padding: 0.1em;
 }
-article {
-}
-#topic1 {
-}
-#topic2 {
-}
-#gallery1 {
-}
-#gallery2 {
-}
-div {
-}
-aside {
+header {
+  overflow: hidden;
+  margin-bottom: 2%;
+  border-bottom: 1px solid rgb(118, 210, 220);
+  height: max-content;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 footer {
-}
-
-/*  -----  Typography  ----- */
-p {
-}
-br {
-}
-ol,
-ul,
-dl {
-}
-li {
-}
-dt {
-}
-dd {
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-} /* Define consistant font family.*/
-h1 {
-}
-h2 {
-}
-h3 {
-}
-h4 {
-}
-h5 {
-}
-h6 {
-}
-
-abbr {
-}
-acronym {
-}
-address {
-}
-blockquote {
-}
-q {
-}
-cite {
-}
-em {
-}
-hr {
-}
-mark {
-}
-s {
-}
-span {
-}
-strong {
-}
-sub {
-}
-sup {
-}
-time {
-}
-
-/*  ----- Coding or instructional typography ----- */
-pre {
-}
-code {
-}
-kbd {
-}
-samp {
-}
-var {
-}
-del {
-}
-ins {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+  height: max-content;
+  border-top: 1px solid rgb(118, 210, 220);
+  font-weight: 100;
+  font-size: 0.8em;
 }
 
 /*  ----- Table ----- */
 table {
-  margin: 0 auto;
+  border-collapse: collapse;
   width: 100%;
+  border: none;
+  padding: 1%;
+  /* putting any border on the table looks ugly.... */
 }
 caption {
+  margin-bottom: 1%;
 }
 thead {
 }
@@ -212,16 +124,68 @@ datalist {
 }
 
 /*  ----- Form ----- */
+
+/* INPUT, SELECT, and BUTTON rules' values include padding and font properties that match the BODY's rule. */
+
 form {
   text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 fieldset {
-  /* box-shadow: 0 0 12px 1px rgb(0, 195, 255); */
-  border: 1px solid rgb(17, 212, 140);
+  border: none;
 }
 legend {
+  margin: 1%;
 }
-label {
+
+input,
+select,
+button {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 1%;
+}
+
+input {
+  background: rgb(38, 40, 40);
+  color: white;
+}
+
+input::placeholder {
+  color: rgb(255, 255, 255, 0.2);
+}
+
+input[type="date"] {
+  color: rgb(255, 255, 255, 0.2);
+}
+
+input[type="date"]:focus-visible {
+  color: white;
+}
+
+select {
+  background: rgb(38, 40, 40);
+  color: white;
+}
+
+input,
+select {
+  display: block;
+  margin: 1em auto;
+  padding: 7px;
+  border: 0.1px solid rgb(255, 255, 255);
+}
+
+input:valid {
+  box-shadow: 0 0 8px 1px rgb(0, 255, 30);
+}
+
+input:invalid {
+  box-shadow: 0 0 8px 1px rgb(255, 0, 0);
+}
+
+input:focus {
+  box-shadow: none;
+  outline: none;
 }
 button {
   align-items: center;
@@ -239,7 +203,7 @@ button {
   color: #fff;
   cursor: pointer;
   display: inline-flex;
-  font-family: "JetBrains Mono", monospace;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   height: 48px;
   justify-content: center;
   line-height: 1;
@@ -275,63 +239,7 @@ button:active {
   transform: translateY(2px);
 }
 
-input,
-select {
-  display: block;
-  margin: 1em auto;
-  padding: 7px;
-}
-
-input:valid {
-  box-shadow: 0 0 8px 1px rgb(0, 255, 30);
-}
-
-input:invalid {
-  box-shadow: 0 0 8px 1px rgb(255, 0, 0);
-}
-
-input:focus {
-  box-shadow: none;
-  outline: none;
-}
-
-output {
-}
-meter {
-}
-progress {
-}
-
-optgroup {
-}
-option {
-}
-textarea {
-}
-
 /* ----- Media ----- */
-figure {
-}
-figcaption {
-}
-img {
-}
-svg {
-}
-picture {
-}
-source {
-}
-iframe {
-}
-video {
-}
-audio {
-}
-embed {
-}
-object {
-}
 
 /*  ----- Classes for alignment, positioning, widths, grids, embellishments, and animation -----  */
 
@@ -348,43 +256,6 @@ object {
 .editIcon:active,
 .deleteIcon:active {
   transform: translateY(2px);
-}
-
-.floatright {
-}
-.floatleft {
-}
-.center-middle {
-}
-
-.ten {
-}
-.twenty {
-}
-.thirty {
-}
-.forty {
-}
-.fifty {
-}
-.sixty {
-}
-.seventy {
-}
-.eighty {
-}
-
-.radius {
-}
-.circle {
-}
-.boxshadow {
-}
-.tshadow {
-}
-.gradient {
-}
-.shape {
 }
 
 @keyframes App-logo {

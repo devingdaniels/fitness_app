@@ -2,20 +2,17 @@ import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-
 import { isValidExerciseEntries } from '../utils/HelperFunctions';
 
 const EditExercisePage = ({exercise}) => {
 
   const navigate = useNavigate();
 
-
   const [name, setName] = useState(exercise.name)
   const [reps, setReps] = useState(exercise.reps)
   const [weight, setWeight] = useState(exercise.weight)
   const [unit, setUnit] = useState(exercise.unit)
   const [date, setDate] = useState(exercise.date)
-
 
   const editExercise = async () =>{
     // Make sure all entries have values
@@ -30,7 +27,7 @@ const EditExercisePage = ({exercise}) => {
           unit: unit, 
           date: date
       }),
-      headers: {'Content-Type': 'application/json',},  
+      headers: {'Content-Type': 'application/json'},  
     })
     // Check for success or failure
     if (response.status === 200) {
@@ -43,11 +40,6 @@ const EditExercisePage = ({exercise}) => {
   }
 }
 
-    
-
-  
-
-
   return (
     <>
       <article>
@@ -55,7 +47,7 @@ const EditExercisePage = ({exercise}) => {
             <p>Paragraph about this page.</p>
             <form onSubmit={(e) => { e.preventDefault();}}>
                 <fieldset>
-                    <legend>Which movie are you adding?</legend>
+                    <legend>Edit exercise properties</legend>
                     <label htmlFor="name">Exercise Name</label>
                     <input
                         type="text"

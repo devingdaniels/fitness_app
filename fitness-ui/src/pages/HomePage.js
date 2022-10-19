@@ -49,7 +49,7 @@ useEffect(() => {
   return (
     <article>
     <h2>Exercise List</h2>
-    <p>Paragraph about this page.</p>
+    <p>Click on the edit or delete to icon to change your current list</p>
     <ExerciseList 
         exercise={exercise} 
         onEdit={onEditExercise} 

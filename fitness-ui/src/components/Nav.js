@@ -7,10 +7,10 @@ import { MdAddTask} from 'react-icons/md'
 function  Navigation() {
   return (
     <nav>        
-        <Link to="/"><AiFillHome size={50}/>
+        <Link to="/"><AiFillHome size={60}/>
           <div>Home</div>        
         </Link>        
-        <Link to="add-exercise"><MdAddTask size={50}/>
+        <Link to="add-exercise"><MdAddTask size={60}/>
          <div>Add</div> 
         </Link>
     </nav>
