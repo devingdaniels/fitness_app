@@ -1,25 +1,19 @@
 import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 // Helper functions
 import {isValidExerciseEntries } from '../utils/HelperFunctions';
 
-// Components 
-
-
-
 const CreateExercisePage = () => {
-
+  // Navigates to different page
   const navigate = useNavigate();
-
   // Component state variables
   const [name, setName] = useState('') 
   const [reps, setReps] = useState(0)
   const [weight, setWeight] = useState(0)
   const [unit, setUnit] = useState('lbs')
   const [date, setDate] = useState('')
-
+  // Called on submit 
   const addExercise = async () =>{
     // Check for valid data before involving server-side code
     if (isValidExerciseEntries(name, reps, weight, unit, date)){      
@@ -45,12 +39,8 @@ const CreateExercisePage = () => {
       const errMessage = await response.json();
       alert(`Failed to add document. Status ${response.status}. ${errMessage.Error}`);
     }    
-    }else {
-
     }
   }
-
-  
   return (   
  <>
       <article>      

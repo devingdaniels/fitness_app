@@ -2,7 +2,7 @@ import React from 'react'
 
 // Helper Functions
 import { formatDate } from '../utils/HelperFunctions';
-
+// Icons
 import { FaTrash} from 'react-icons/fa'
 import {FiEdit} from 'react-icons/fi'
 

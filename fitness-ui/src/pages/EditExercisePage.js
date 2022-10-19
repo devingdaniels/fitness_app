@@ -1,19 +1,19 @@
 import React from 'react'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+// Helper functions
 import { isValidExerciseEntries } from '../utils/HelperFunctions';
 
 const EditExercisePage = ({exercise}) => {
-
+// Navigates to new page
   const navigate = useNavigate();
-
+// State variables 
   const [name, setName] = useState(exercise.name)
   const [reps, setReps] = useState(exercise.reps)
   const [weight, setWeight] = useState(exercise.weight)
   const [unit, setUnit] = useState(exercise.unit)
   const [date, setDate] = useState(exercise.date)
-
+// Called on submit 
   const editExercise = async () =>{
     // Make sure all entries have values
     if( isValidExerciseEntries(name, reps, weight, unit, date)){
@@ -36,10 +36,10 @@ const EditExercisePage = ({exercise}) => {
       const errMessage = await response.json();
       alert(`Failed to update document. Status ${response.status}. ${errMessage.Error}`);
   }
+  // Go home
   navigate('/')
   }
 }
-
   return (
     <>
       <article>

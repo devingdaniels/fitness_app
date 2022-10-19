@@ -15,16 +15,13 @@ import EditExercisePage from './pages/EditExercisePage'
 function App() {
   // State to track array of exercise objects
   const [exercise, setExercise] = useState([])
-
   return (
     <>
       <header>
         <h1>ExTrack</h1>
         <p>Add and track all your fitness exercises!</p>
       </header>
-
       <Navigation/>
-
       <main>      
         <Routes>
           <Route path='/' element={<HomePage setExercise={setExercise}/>} />
@@ -32,7 +29,6 @@ function App() {
           <Route path='edit-exercise' element={<EditExercisePage exercise={exercise}/>} />
         </Routes>
       </main>
-
       <footer>
         <Footer/>
       </footer>

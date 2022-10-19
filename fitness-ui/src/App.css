@@ -26,14 +26,6 @@ body {
 a {
   text-decoration: none;
 }
-a:link {
-}
-a:hover {
-}
-a:active {
-}
-a:visited {
-}
 
 /*  ----- Navigation ----- Override text links for navigation only.  */
 nav {
@@ -98,35 +90,16 @@ table {
 caption {
   margin-bottom: 1%;
 }
-thead {
-}
-tbody {
-}
-tfoot {
-}
-tr {
-}
+
 tr:nth-child(even) {
   background-color: rgb(37, 43, 56);
 }
-th {
-}
+
 td {
   padding: 1em;
 }
-td:nth-child(1) {
-}
-colgroup {
-}
-data {
-}
-datalist {
-}
 
 /*  ----- Form ----- */
-
-/* INPUT, SELECT, and BUTTON rules' values include padding and font properties that match the BODY's rule. */
-
 form {
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
